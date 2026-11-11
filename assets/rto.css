@@ -1,0 +1,12 @@
+/* RTO Codes: own styles on top of the shared frame */
+.rto-sort{margin:10px 0 0}
+.rto-states a b{color:var(--accent);margin-left:4px}
+.rto-plate{display:inline-flex;gap:0;border:3px solid #111;border-radius:10px;background:#fff;color:#111;font:700 clamp(1.3rem,1rem + 2.4vw,2rem)/1 var(--mono);padding:10px 8px;margin:10px 0;letter-spacing:.06em}
+.rto-plate span{padding:0 8px}.rto-plate span+span{border-left:2px dashed #bbb}
+.rto-cta{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0}
+.rto-recent{font-size:.92rem;margin:12px 0}.rto-recent a{display:inline-block;margin:4px 8px 4px 0;padding:8px 12px;border:1px solid var(--line);border-radius:99px;text-decoration:none;background:var(--surface)}
+.rto-list{list-style:none;padding:0;margin:12px 0;display:grid;gap:8px;grid-template-columns:repeat(auto-fill,minmax(min(100%,280px),1fr))}
+.rto-list a{display:block;padding:10px 14px;background:var(--surface);border:1px solid var(--line);border-radius:10px;text-decoration:none;color:var(--ink);min-height:52px}
+.rto-list a b{font-family:var(--mono);color:var(--accent);margin-right:8px}.rto-list a small{display:block;color:var(--soft)}
+.grid a{flex-wrap:wrap}.grid a small{white-space:normal}
+#rto-q{font-family:var(--mono);text-transform:uppercase}#rto-q::placeholder{text-transform:none;font-family:var(--font)}
