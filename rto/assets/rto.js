@@ -39,14 +39,14 @@
     return '<div class="result rise"><h2>' + esc(s[1]) + '</h2><p class="big">' + show(o[0]) + '</p><p><b>' + esc(o[1]) + '</b></p>' +
       '<dl class="facts"><dt>State or UT</dt><dd>' + esc(s[1]) + ' (' + s[0] + ')</dd><dt>On VAHAN since</dt><dd>' + esc(o[3]) + '</dd>' +
       (o[4] ? '' : '<dt>Note</dt><dd>A three-digit VAHAN code. It is not normally seen on number plates.</dd>') + '</dl>' +
-      '<div class="acts"><a class="btn sm" href="/' + s[2] + '/">All ' + esc(s[0]) + ' codes</a><button class="btn sm ghost" type="button" data-copy="' + esc(text) + '">Copy</button>' +
-      '<button class="btn sm ghost" type="button" data-wa="' + esc(text + ' rto.shareyourgroup.com') + '">WhatsApp</button></div></div>';
+      '<div class="acts"><a class="btn sm" href="/rto/' + s[2] + '/">All ' + esc(s[0]) + ' codes</a><button class="btn sm ghost" type="button" data-copy="' + esc(text) + '">Copy</button>' +
+      '<button class="btn sm ghost" type="button" data-wa="' + esc(text + ' rto.shareyourgroup.com/rto') + '">WhatsApp</button></div></div>';
   }
   function run(save) {
     var raw = q.value.trim().toUpperCase(), v = raw.replace(/[^A-Z0-9]/g, '');
     if (!v) { out.innerHTML = ''; return; }
     if (/^\d{2}BH/.test(v)) {
-      out.innerHTML = '<div class="result"><h2>Bharat series number</h2><p>A number that starts with two digits and BH is a Bharat (BH) series plate. It has no state letters and no RTO code. The two digits are the year of registration.</p><p><a href="/number-plate/">How to read a number plate</a></p></div>';
+      out.innerHTML = '<div class="result"><h2>Bharat series number</h2><p>A number that starts with two digits and BH is a Bharat (BH) series plate. It has no state letters and no RTO code. The two digits are the year of registration.</p><p><a href="/rto/number-plate/">How to read a number plate</a></p></div>';
       return;
     }
     var m = v.match(/^([A-Z]{2})(\d{1,3})/), hits = [];
@@ -59,8 +59,8 @@
       }
       if (!hits.length) {
         var has = D.states.filter(function (s) { return s[0] === st; })[0];
-        out.innerHTML = '<div class="result"><h2>No office with this code</h2><p>' + (has ? 'The VAHAN list has no office numbered ' + esc(num) + ' in ' + esc(has[1]) + '. <a href="/' + has[2] + '/">See all ' + st + ' codes</a>.' :
-          esc(st) + ' is not a state code in use on VAHAN today. It may be an older code: see <a href="/state-codes/">state letters</a>.') + '</p></div>';
+        out.innerHTML = '<div class="result"><h2>No office with this code</h2><p>' + (has ? 'The VAHAN list has no office numbered ' + esc(num) + ' in ' + esc(has[1]) + '. <a href="/rto/' + has[2] + '/">See all ' + st + ' codes</a>.' :
+          esc(st) + ' is not a state code in use on VAHAN today. It may be an older code: see <a href="/rto/state-codes/">state letters</a>.') + '</p></div>';
         return;
       }
       out.innerHTML = hits.map(card).join('');
@@ -71,20 +71,20 @@
     var words = raw.toLowerCase().split(/\s+/).filter(Boolean);
     var byName = D.offices.filter(function (o) { var n = (o[1] + ' ' + D.states[o[2]][1]).toLowerCase(); return words.every(function (w) { return n.indexOf(w) > -1; }); });
     hits = hits.concat(byName.filter(function (o) { return hits.indexOf(o) < 0; }));
-    if (!hits.length) { out.innerHTML = '<p class="hint">No office or place matches "' + esc(raw) + '". Try the first letters of the number plate, such as PB10, or <a href="/states/">browse by state</a>.</p>'; return; }
+    if (!hits.length) { out.innerHTML = '<p class="hint">No office or place matches "' + esc(raw) + '". Try the first letters of the number plate, such as PB10, or <a href="/rto/states/">browse by state</a>.</p>'; return; }
     if (hits.length === 1) { out.innerHTML = card(hits[0]); return; }
     out.innerHTML = '<p class="hint">' + hits.length + ' matches' + (hits.length > 60 ? ', showing the first 60' : '') + '. Tap one.</p><ul class="rto-list">' + hits.slice(0, 60).map(function (o) {
-      return '<li><a href="/?q=' + o[0] + '" data-pick="' + o[0] + '"><b>' + show(o[0]) + '</b>' + esc(o[1]) + '<small>' + esc(D.states[o[2]][1]) + '</small></a></li>';
+      return '<li><a href="/rto/?q=' + o[0] + '" data-pick="' + o[0] + '"><b>' + show(o[0]) + '</b>' + esc(o[1]) + '<small>' + esc(D.states[o[2]][1]) + '</small></a></li>';
     }).join('') + '</ul>';
   }
   function recent() {
     var list = SYG.recent('rto-recent');
     rec.hidden = !list.length;
-    rec.innerHTML = list.length ? '<b>Looked up recently:</b> ' + list.map(function (x) { return '<a href="/?q=' + esc(x.u) + '" data-pick="' + esc(x.u) + '">' + esc(x.t) + '</a>'; }).join('') : '';
+    rec.innerHTML = list.length ? '<b>Looked up recently:</b> ' + list.map(function (x) { return '<a href="/rto/?q=' + esc(x.u) + '" data-pick="' + esc(x.u) + '">' + esc(x.t) + '</a>'; }).join('') : '';
   }
   function go(save) {
     if (D) return run(save);
-    if (!wait) { out.innerHTML = '<div class="shim"></div>'; wait = SYG.json('/data/rto.json').then(function (j) { D = j; }); }
+    if (!wait) { out.innerHTML = '<div class="shim"></div>'; wait = SYG.json('/rto/data/rto.json').then(function (j) { D = j; }); }
     wait.then(function () { run(save); }, function () { out.innerHTML = '<p class="hint">The list could not be loaded. Check your connection and try again.</p>'; wait = null; });
   }
   var timer;

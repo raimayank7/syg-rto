@@ -1,0 +1,26 @@
+/* Driving Licence: own styles on top of the shared frame */
+.lc-lead{font-size:1.08rem;color:var(--soft)}
+.lc-cta{display:flex;gap:10px;flex-wrap:wrap;margin:16px 0}
+.lc-h{margin:0 0 10px;font-size:1.15rem}
+.grid a{flex-wrap:wrap}.grid a small{white-space:normal}
+input[type=date]{width:100%;min-height:46px;padding:10px 12px;font:inherit;font-size:1rem;color:var(--ink);background:var(--field);border:1px solid var(--field-line);border-radius:10px}
+.lc-signs{list-style:none;padding:0;margin:14px 0;display:grid;gap:12px;grid-template-columns:repeat(auto-fill,minmax(min(100%,240px),1fr))}
+.lc-signs li{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:14px;display:grid;grid-template-columns:72px 1fr;gap:4px 14px;align-items:center}
+.lc-signs b{align-self:end}.lc-signs span{grid-column:2;color:var(--soft);font-size:.92rem;align-self:start}
+.lc-sign{width:72px;height:72px;grid-row:span 2;background:#fff;border-radius:10px;padding:5px}
+.lc-sign svg{width:100%;height:100%;display:block}
+.lc-sign.sm{width:60px;height:60px;float:right;margin:0 0 6px 10px}
+.lc-qa>li{margin:14px 0;padding-bottom:10px;border-bottom:1px solid var(--line)}
+.lc-qa ul{margin:6px 0;padding-left:20px;color:var(--soft)}
+.lc-ans{margin:4px 0;font-weight:600}
+.pt-count{color:var(--soft);font-size:.9rem;margin:0 0 6px}
+.pt-q{margin:.2em 0 .6em;font-size:1.2rem}
+.pt-sign{width:120px;height:120px;background:#fff;border-radius:12px;padding:8px;margin:0 0 10px}
+.pt-sign svg{width:100%;height:100%;display:block}
+.pt-opts{display:grid;gap:10px}
+.pt-opt{text-align:left;min-height:48px;padding:10px 14px;border-radius:10px;border:1px solid var(--field-line);background:var(--field);color:var(--ink);font:inherit;font-size:1rem;cursor:pointer}
+.pt-opt:hover:not(:disabled){border-color:var(--accent)}
+.pt-opt.ok{border-color:var(--ok);box-shadow:inset 0 0 0 2px var(--ok);font-weight:700}
+.pt-opt.no{border-color:var(--bad);box-shadow:inset 0 0 0 2px var(--bad)}
+.pt-opt:disabled{cursor:default;opacity:1;color:var(--ink)}
+.pt-review li{margin:8px 0}
